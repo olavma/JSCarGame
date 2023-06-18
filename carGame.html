@@ -40,6 +40,7 @@
 
     <!-- Carretera con el jugador (coche) y con el enemigo (camion) -->
     <div id="contenedor">
+        <audio id="music" src="src/audio/antes de la partida.mp3"></audio> <!-- Intentar que se ejecute en este instante -->
         <canvas id="coche" width="100" height="100" style="display:none"></canvas>
         <canvas id="camion0" class="camiones" width="150" height="100" style="display:none"></canvas>
         <canvas id="camion1" class="camiones" width="150" height="100" style="display:none"></canvas>
@@ -70,19 +71,9 @@
         </p>
         <button id="refresh">Intentarlo otra vez</button>
     </div>
-
-    <!-- Pintamos al jugador y al enemigo -->
-    <script type="application/javascript">
-        document.getElementById("start").onclick = function () {
-            start();
-        }
-    </script>
-
-
-    <script src="coche.js"></script>
-    <script src="camion.js"></script>
-    <script src="carGame.js"></script>
-    <!-- El juego original es Spy Hunter -->
 </body>
-
+<script src="coche.js"></script>
+<script src="camion.js"></script>
+<script src="carGame.js"></script>
+<!-- El juego original es Spy Hunter -->
 </html>

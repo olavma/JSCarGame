@@ -55,7 +55,14 @@ class Camion {
 
             // Imagen del enemigo
             let bgImg1 = new Image();
-            bgImg1.src = './img/camion.png';
+            fetch('./src/icon.json')
+            .then((response) => response.json())
+            .then((json) => {
+                json.forEach(icon => {
+                    if(icon.Nombre == "Camion")
+                    bgImg1.src = icon.imagen;
+                });
+            })
             bgImg1.onload = () => {
                 ctx2.drawImage(bgImg1, 0, 0, 150, 100);
             }

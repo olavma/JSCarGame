@@ -37,6 +37,8 @@ class Coche {
     // Metodo que pinta el coche, le pone imagen, y el color del campo de fuerza
     pintar() {
         this.elemento.style.display = "block";
+        
+        
         if (this.elemento.getContext) {
             // Pintamos al jugador
             var ctx = this.elemento.getContext("2d");
@@ -52,7 +54,15 @@ class Coche {
 
             // Imagen del jugador
             let bgImg = new Image();
-            bgImg.src = './img/coche.png';
+            fetch('./src/icon.json')
+            .then((response) => response.json())
+            .then((json) => {
+                json.forEach(icon => {
+                    if(icon.Nombre == "Coche"){
+                        bgImg.src = icon.imagen;
+                    }
+                });
+            })
             bgImg.onload = () => {
                 ctx.drawImage(bgImg, 10, 10, 100, 100);
             }

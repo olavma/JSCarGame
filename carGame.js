@@ -22,7 +22,23 @@ var lose = document.getElementById("text");
 var km = document.getElementById("km");
 var camionVM = document.getElementById("enemyVMax");
 var camionVm = document.getElementById("enemyVMin");
+var musicas = [];
 
+// Musica
+const audio = document.getElementById("music");
+audio.play();
+fetch('./src/music.json')
+    .then((response) => response.json())
+    .then((json) => {
+        json.forEach(song => {
+            musicas.push(song);
+        })
+    })
+    .catch((error) => console.error(error))
+
+document.getElementById("start").onclick = function () {
+    start();
+}
 
 // Procedimiento que inicia la partida, pone todos los valores correspondientes y pinta el coche y los camiones
 function start(){
@@ -38,6 +54,13 @@ function start(){
     for(let i=0;i<camiones.length;i++){
         camiones[i].pintar();
     }
+
+    musicas.forEach(song => {
+        if(song.Nombre == "Partida"){
+            audio.src = song.cancion;
+            audio.play(); // Hay que ponerlo en bucle
+        }
+    });
 }
 
 // Movemos el coche segun el movimiento del mouse
@@ -54,6 +77,14 @@ function actualizar() {
             contenedor.style.display = "none";
             lose.style.display = "block";
             coche.activo = false;
+
+            musicas.forEach(song => {
+                if(song.Nombre == "Derrota"){
+                    audio.src = song.cancion;
+                    audio.play();
+                }
+            });
+
             // For de camiones : camiones[i].activo
             for(let i=0;i<camiones.length;i++){
                 camiones[i].activo = false;
@@ -67,6 +98,14 @@ function actualizar() {
             win.style.display = "block";
             contenedor.style.display = "none";
             coche.activo = false;
+
+            musicas.forEach(song => {
+                if(song.Nombre == "Victoria"){
+                    audio.src = song.cancion;
+                    audio.play();
+                }
+            });
+
             for(let i=0;i<camiones.length;i++){
                 camiones[i].activo = false;
             }
